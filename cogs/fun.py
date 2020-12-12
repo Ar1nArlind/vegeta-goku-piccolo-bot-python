@@ -12,10 +12,9 @@ class fun(commands.Cog):
         await ctx.send('nigga')
 
     @commands.command(pass_context = True)
-    async def swag(ctx):
-        embed = discord.Embed(Title = "Random Number", description  = (random.randint(1, 100)), color = (OxF85252))
-        embed)
-        title await ctx.send(embed = embed)
+    async def swag(self, ctx):
+        embed = discord.Embed(Title = "Your Swag 1-100", description  = (random.randint(1, 100)), color = (0xa11cff))
+        await ctx.send(embed = embed)
 
 def setup(bot):
     bot.add_cog(fun(bot))
