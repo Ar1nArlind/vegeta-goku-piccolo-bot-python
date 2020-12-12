@@ -1,16 +1,11 @@
 import discord
 from discord.ext import commands
 import random
-
-bot = commands.Bot
+ 
 class fun(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-
-    @commands.command()
-    async def ping(self, ctx):
-        await ctx.send(f'Pong! {round(bot.latency * 1000)}ms')
 
     @commands.command()
     async def nigga(self, ctx):
