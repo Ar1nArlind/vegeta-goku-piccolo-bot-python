@@ -14,13 +14,21 @@ async def on_ready():
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency * 1000)}ms')
 
-@bot.command()
+@bot.command
 async def load(ctx, extension):
-    bot.load_extension(f'cogs.{extension}')
+    try:
+        bot.load_extension(f'''cogs.{extension}''')
+        await ctx.channel.send(f'''Successfully loaded {extension}''')
+    except Exception as e:
+        print(f'''Error! We could not load the extension {extension} because {e}''')
 
-@bot.command()
+@bot.command
 async def unload(ctx, extension):
-    bot.unload_extension(f'cogs.{extension}')
+    try:
+        bot.unload_extension(f'''cogs.{extension}''')
+        await ctx.channel.send(f'''Successfully loaded {extension}''')
+    except Exception as e:
+        print(f'''Error! We could not load the extension {extension} because {e}''')
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
