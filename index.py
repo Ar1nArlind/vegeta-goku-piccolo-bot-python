@@ -9,7 +9,6 @@ client = discord.Client()
 async def on_ready():
     print(f'Logged in as: {client.user.name}')
     print(f"User ID: {client.user.id}")
-    print('-----')
 
 @client.command()
 async def ping(ctx):
