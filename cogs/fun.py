@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import random
  
 class fun(commands.Cog):
 
@@ -7,8 +8,12 @@ class fun(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def whatever(self, ctx):
-        await ctx.send('whatever')
+    async def nigga(self, ctx):
+        await ctx.send('nigga')
+
+    @commands.command()
+    async def swag(self, ctx):
+        await ctx.send('(random.randint(1, 100))')
 
 def setup(bot):
     bot.add_cog(fun(bot))
