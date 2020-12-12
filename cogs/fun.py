@@ -13,7 +13,7 @@ class fun(commands.Cog):
 
     @commands.command(pass_context = True)
     async def swag(self, ctx):
-        text = random.randint(1, 100)
+        text = str(random.randint(1, 100)) 
         text += '%'
         embed = discord.Embed(title = "Swag Meter", description  = (text), color = (0xa11cff))
         await ctx.send(embed = embed)
