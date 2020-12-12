@@ -1,5 +1,4 @@
 import os
-
 import discord
 from discord.ext import commands
 
@@ -11,4 +10,4 @@ async def on_ready():
     print(f"User ID: {client.user.id}")
     print('-----')
 
-client.run('token')
+client.run('os.environ['DISCORD_TOKEN']')
