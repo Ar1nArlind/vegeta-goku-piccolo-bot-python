@@ -10,4 +10,4 @@ async def on_ready():
     print(f"User ID: {client.user.id}")
     print('-----')
 
-client.run('os.environ['DISCORD_TOKEN']')
+client.run(os.environ['DISCORD_TOKEN'])
