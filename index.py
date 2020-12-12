@@ -17,14 +17,22 @@ async def ping(ctx):
 @bot.command()
 @commands.is_owner()
 async def load(ctx, extension):
-    bot.load_extension(f'cogs.{extension}')
-    await ctx.send(f'nigga')
+    try:
+        bot.load_extension(f'cogs.{extension}')
+        await ctx.send(f'Cog loaded')
+    except discord.ext.commands.errors.NotOwner:
+        await ctx.send("Bot Owner only")
 
 @bot.command()
 @commands.is_owner()
 async def unload(ctx, extension):
-    bot.unload_extension(f'cogs.{extension}')
-    await ctx.send(f'nigga')    
+    try:
+        bot.unload_extension(f'cogs.{extension}')
+        await ctx.send(f'Cog Unloaded')
+    except discord.ext.commands.errors.NotOwner:
+        await ctx.send("Bot Owner only")
+        
+            
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
