@@ -13,5 +13,12 @@ class Administrator(commands.Cog):
         await user.send(f"You have been banned in {ctx.guild} for {reason}")
         await ctx.send(f"{user} has been successfully banned.") 
 
+    @commands.command() 
+    @commands.has_permissions(kick_members=True) 
+    async def kick(self, ctx, user: discord.Member, *, reason):
+        await ctx.guild.kick(user, reason=reason) 
+        await user.send(f"You have been kicked in {ctx.guild} for {reason}")
+        await ctx.send(f"{user} has been successfully kicked.") 
+
 def setup(bot):
     bot.add_cog(Administrator(bot))
