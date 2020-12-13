@@ -22,10 +22,22 @@ class Administrator(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def purge(self, ctx, amount=10):
+    async def purge(self, ctx, amount=5):
         await ctx.channel.purge(limit=amount)
-        await ctx.send(f"ok") 
-        await ctx.send(delete_after=5.0)
+        await ctx.send(f"ok")
+
+    @commands.command()
+    async def unban(self, ctx, *, member):
+        banned_users = await ctx.guild.bans()
+        member_name, member_discriminator = member.split('#')
+
+        for ban_entry in banned_users:
+            user = ban_entry.user
+
+            if (user.name, user.discriminator) == (member_name, member_discriminator):
+                await ctx.guild.unban(user)
+                await ctx.send(f'Unbanned {user.mention}')
+                return
 
 def setup(bot):
     bot.add_cog(Administrator(bot))
