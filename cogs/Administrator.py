@@ -12,7 +12,7 @@ class Administrator(commands.Cog):
         guild = ctx.guild
         mbed = discord.Embed(
             title = 'Success',
-            descrition = f"{user} has been banned."
+            descrition = f'{user} has been banned.'
         )
         await ctx.send(embed=mbed)
         await guild.ban(user=user)
@@ -27,6 +27,17 @@ class Administrator(commands.Cog):
         )
         await ctx.send(embed=mbed)
         await guild.kick(user=user)
+
+    @commands.command()
+    @commands.has_permissions(ban_members=True)
+    async def unban(self, ctx, user: discord.User):
+        guild = ctx.guild
+        mbed = discord.Embed(
+            title = 'Success',
+            descrition = f'{user} has been unbanned.'
+        )
+        await ctx.send(embed=mbed)
+        await guild.unban(user=user)
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
