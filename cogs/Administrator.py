@@ -7,7 +7,7 @@ class Administrator(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def nigga(self, ctx):
+    async def nigga2(self, ctx):
         await ctx.send('nigga')
 
 def setup(bot):
