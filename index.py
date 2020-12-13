@@ -1,41 +1,14 @@
 import os
 import discord
 from discord.ext import commands
-import json
-
-def get_prefix(bot,message):
-    with open('prefixes.json', 'r') as f:
-        prefixes = json.load(f)
-
-    return prefixes[str(message.guild.id)]
  
-bot = commands.Bot(command_prefix = get_prefix)
+bot = commands.Bot(command_prefix = '$')
 
 @bot.event
 async def on_ready():
     print(f'Logged in as: {bot.user.name}')
     print(f"User ID: {bot.user.id}")
     print('-----')
-
-@bot.event
-async def on_guild_join(guild):
-    with open('prefixes.json', 'r') as f:
-        prefixes = json.load(f)
-
-    prefixes[str(guild.id)] = '$'
-
-    with open('prefixes.json', 'w') as f:
-        json.dump(prefixes, f, indent=4)
-
-@bot.command()
-async def prefix(ctx, prefix):
-    with open('prefixes.json', 'r') as f:
-        prefixes = json.load(f)
-
-    prefixes[str(ctx.guild.id)] = prefix
-
-    with open('prefixes.json', 'w') as f:
-        json.dump(prefixes, f, indent=4)    
 
 @bot.command()
 async def ping(ctx):
