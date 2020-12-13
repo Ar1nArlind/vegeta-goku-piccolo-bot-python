@@ -4,7 +4,7 @@ from discord.ext import commands
 import json
 
 def get_prefix(bot,message):
-    with open('prefixs.json', 'r') as f:
+    with open('prefixes.json', 'r') as f:
         prefixes = json.load(f)
 
     return prefixes[str(message.guild.id)]
@@ -19,7 +19,7 @@ async def on_ready():
 
 @bot.event
 async def on_guild_join(guild):
-    with open('prefixs.json', 'r') as f:
+    with open('prefixes.json', 'r') as f:
         prefixes = json.load(f)
 
     prefixes[str(guild.id)] = '$'
@@ -29,7 +29,7 @@ async def on_guild_join(guild):
 
 @bot.command()
 async def prefix(ctx, prefix):
-    with open('prefixs.json', 'r') as f:
+    with open('prefixes.json', 'r') as f:
         prefixes = json.load(f)
 
     prefixes[str(ctx.guild.id)] = prefix
