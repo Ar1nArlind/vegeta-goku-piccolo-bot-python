@@ -11,4 +11,4 @@ class Administrator(commands.Cog):
         await ctx.send('nigga')
 
 def setup(bot):
-    bot.add_cog(fun(bot))
+    bot.add_cog(Administrator(bot))
