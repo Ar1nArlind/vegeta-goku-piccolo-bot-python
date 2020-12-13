@@ -27,6 +27,7 @@ class Administrator(commands.Cog):
         await ctx.send(f"ok")
 
     @commands.command()
+    @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, *, member):
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split('#')
@@ -35,7 +36,7 @@ class Administrator(commands.Cog):
             user = ban_entry.user
 
             if (user.name, user.discriminator) == (member_name, member_discriminator):
-                await ctx.guild.unban(user)
+                await ctx.guild.unban(id)
                 await ctx.send(f'Unbanned {user.mention}')
                 return
 
