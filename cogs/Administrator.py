@@ -10,23 +10,22 @@ class Administrator(commands.Cog):
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, user: discord.User):
         guild = ctx.guild
-        embed = discord.Embed(
-                title = 'Success',
-                descrition = f"{user} has been banned."
+        mbed = discord.Embed(
+            title = 'Success',
+            descrition = f"{user} has been banned."
         )
-        
-        await ctx.send(embed=embed)
+        await ctx.send(embed=mbed)
         await guild.ban(user=user)
          
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, user: discord.User):
         guild = ctx.guild
-        embed = discord.Embed(
-                title = 'Success',
-                descrition = f"{user} has been kicked."
+        mbed = discord.Embed(
+            title = 'Success',
+            descrition = f'{user} has been kicked.'
         )
-        await ctx.send(embed=embed)
+        await ctx.send(embed=mbed)
         await guild.kick(user=user)
 
     @commands.command()
