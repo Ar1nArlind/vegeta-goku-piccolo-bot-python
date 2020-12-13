@@ -25,6 +25,7 @@ class Administrator(commands.Cog):
     async def purge(self, ctx, amount=10):
         await ctx.channel.purge(limit=amount)
         await ctx.send(f"ok") 
+        await ctx.message.delete()
 
 def setup(bot):
     bot.add_cog(Administrator(bot))
