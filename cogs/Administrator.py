@@ -20,5 +20,11 @@ class Administrator(commands.Cog):
         await user.send(f"You have been kicked in {ctx.guild} for {reason}")
         await ctx.send(f"{user} has been successfully kicked.") 
 
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def purge(self, ctx, amount=10):
+        await ctx.channel.purge(limit=amount)
+        await ctx.send(f"ok") 
+
 def setup(bot):
     bot.add_cog(Administrator(bot))
