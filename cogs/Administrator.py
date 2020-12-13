@@ -7,27 +7,27 @@ class Administrator(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, user: discord.User):
         guild = ctx.guild
         embed = discord.Embed(
                 title = 'Success',
                 descrition = f"{user} has been banned."
         )
-        if ctx.author.guild_permission.ban_members:
-            await ctx.send(embed=embed)
-            await guild.ban(user=user)
+        
+        await ctx.send(embed=embed)
+        await guild.ban(user=user)
          
-
     @commands.command()
+    @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, user: discord.User):
         guild = ctx.guild
         embed = discord.Embed(
                 title = 'Success',
                 descrition = f"{user} has been kicked."
         )
-        if ctx.author.guild_permission.kick_members:
-            await ctx.send(embed=embed)
-            await guild.kick(user=user)
+        await ctx.send(embed=embed)
+        await guild.kick(user=user)
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
