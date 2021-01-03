@@ -1,8 +1,18 @@
 import os
 import discord
+import json
+import asyncio
+import random
+import datetime
 from discord.ext import commands
- 
-bot = commands.Bot(command_prefix = '$')
+
+def get_prefix(bot,message):
+    with open('src/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    return prefixes[str(message.guild.id)]
+
+bot = commands.Bot(command_prefix = get_prefix, case_insensitive=True)
 
 @bot.event
 async def on_ready():
@@ -24,10 +34,33 @@ async def load(ctx, extension):
 @commands.is_owner()
 async def unload(ctx, extension):
     bot.unload_extension(f'cogs.{extension}')
-    await ctx.send(f'Cog Unloaded')    
+    await ctx.send(f'Cog Unloaded')
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
-bot.run(os.environ['DISCORD_TOKEN'])
+@bot.event
+async def on_guild_join(guild):
+    with open('src/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    prefixes[str(guild.id)] = '$'
+
+    with open('src/prefixes.json', 'w') as f:
+        json.dump(prefixes,f,indent=4)
+
+@bot.command()
+@commands.has_permissions(administrator = True)
+async def prefix(ctx, prefix):
+    with open('src/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    prefixes[str(ctx.guild.id)] = prefix
+
+    with open('src/prefixes.json', 'w') as f:
+        json.dump(prefixes,f,indent=4)
+
+    await ctx.send(f'The prefix was changed to {prefix}')
+
+bot.run('Token')
