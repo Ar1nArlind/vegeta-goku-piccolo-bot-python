@@ -41,7 +41,7 @@ class Administrator(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def purge(self, ctx, amount=5):
+    async def purge(self, ctx, amount : int):
         await ctx.channel.purge(limit=amount)
         await ctx.send(f"ok")
         
