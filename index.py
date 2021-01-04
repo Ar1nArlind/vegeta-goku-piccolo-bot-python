@@ -5,6 +5,7 @@ import asyncio
 import random
 import datetime
 from discord.ext import commands
+from discord.ext.commands import CommandNotFound
 
 def get_prefix(bot,message):
     with open('src/prefixes.json', 'r') as f:
@@ -19,6 +20,11 @@ async def on_ready():
     print(f'Logged in as: {bot.user.name}')
     print(f"User ID: {bot.user.id}")
     print('-----')
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        pass
 
 @bot.command()
 async def ping(ctx):
@@ -63,4 +69,4 @@ async def prefix(ctx, prefix):
 
     await ctx.send(f'The prefix was changed to {prefix}')
 
-bot.run('Token')
+bot.run('TOKEN')
