@@ -6,7 +6,7 @@ class Fun(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-
+        
     @commands.command(pass_context = True)
     async def swag(self, ctx):
         text = str(random.randint(0, 100)) 
@@ -32,6 +32,31 @@ class Fun(commands.Cog):
             )
             mbed.set_image(url=f"{ctx.author.avatar_url}")
             await ctx.send(embed=mbed)
+
+    @commands.command()
+    async def serverinfo(self, ctx):
+        name = str(ctx.guild.name)
+        description = str(ctx.guild.description)
+
+        owner = str(ctx.guild.owner)
+        id = str(ctx.guild.id)
+        region = str(ctx.guild.region)
+        memberCount = str(ctx.guild.member_count)
+
+        icon = str(ctx.guild.icon_url)
+
+        embed = discord.Embed(
+            title=name + " Server Information",
+            description=description,
+            color=discord.Color(0xa11cff),
+        )
+        embed.set_thumbnail(url=icon)
+        embed.add_field(name="Owner", value=owner, inline=True)
+        embed.add_field(name="Server ID", value=id, inline=True)
+        embed.add_field(name="Region", value=region, inline=True)
+        embed.add_field(name="Member Count", value=memberCount, inline=True)
+
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Fun(bot))
